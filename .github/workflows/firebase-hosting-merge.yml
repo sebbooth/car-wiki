@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
+      - name: "Create Env File"
+        run: |
+          touch .env
+          echo "${{ secrets.REACT_APP_ENV_FILE }}" > .env
       - run: npm ci && npm run build
         working-directory: react_frontend
       - uses: FirebaseExtended/action-hosting-deploy@v0
