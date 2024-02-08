@@ -1,0 +1,21 @@
+.add-car {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.car-entry {
+  margin: 10px;
+}
+
+.car-entry * {
+  margin: 0px;
+}
+
+.car-entry:nth-child(odd) {
+  background: grey;
+}
+
+.car-entry:nth-child(even) {
+  background: white;
+}
