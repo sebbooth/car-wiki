@@ -1,18 +1,56 @@
 from bs4 import BeautifulSoup
+import re
+import requests
 
-with open("brand_list.html", "r", encoding="utf-8") as html_file:
-    content = html_file.read()
+def has_active(text):
+    pattern = r'active'
+    return bool(re.search(pattern, text, flags=re.IGNORECASE))
 
-    soup = BeautifulSoup(content, "lxml")
+def has_former(text):
+    pattern = r'former'
+    return bool(re.search(pattern, text, flags=re.IGNORECASE))
 
-    contentContainer = soup.find("div", class_= "mw-content-ltr")
+url = "https://en.wikipedia.org/wiki/List_of_car_brands"
+htmlResponse = requests.get(url)
 
-    countries = contentContainer.find_all("h2")[1]
+soup = BeautifulSoup(htmlResponse.content, "html.parser")
+contentContainer = soup.find("div", class_= "mw-content-ltr")
+stack = contentContainer.find_all(["h2", "h3", "li"])
 
-    countryContent = countries.find_next_sibling("ul")
+curCountry = ""
+curStatus = ""
+with open("brand_list.csv", "w", encoding="utf-8") as csvF:
+    csvF.write("Brand,Country,Status,Wikipedia Page") 
 
-    print(countryContent)
-            
+    for t in (stack):
+        title = t.find("span")
+        brand = t.find("a")
+        
+        if (title):
+            if (title.text=="citation needed"):
+                continue
 
+            id = title['id']
 
-html_file.close()
+            if (id == "See_also"):
+                break
+
+            if (has_active(id) or has_former(id)):
+                if has_active(id):
+                    curStatus = "Active"
+                else:
+                    curStatus = "Former"
+            else:
+                curCountry = id
+                curStatus = ""          
+                
+        elif (brand):
+            row = "\n" +brand['title'] + "," + curCountry + "," + curStatus + ",https://en.wikipedia.org" + brand['href']
+            try:
+                csvF.write(row) 
+            except:
+                print(brand['title'])
+                print(curCountry)
+                print(curStatus)
+                print(brand['href'])
+csvF.close()
