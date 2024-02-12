@@ -286,5 +286,35 @@
             "Nutzlast:": "4,5 t",
             "zul. Gesamtgewicht:": "7,85 t"
         }
+    },
+    {
+        "Make": "VinFast",
+        "Model": "LUX A2.0",
+        "URL": "https://en.wikipedia.org/wiki/VinFast_LUX_A2.0",
+        "imgURL": "https://en.wikipedia.org/wiki/File:Vinfast_Lux_A_2.0,_Paris_Motor_Show_2018,_IMG_0674.jpg",
+        "Overview": {
+            "Manufacturer": "VinFast",
+            "Production": "2019\u20132022",
+            "Assembly": "Vietnam: Haiphong (VinFast Trading and Production LLC)",
+            "Designer": "Pininfarina"
+        },
+        "Body and chassis": {
+            "Class": "Executive car (E)",
+            "Body style": "4-door sedan",
+            "Layout": "Front-engine, rear-wheel-drive",
+            "Platform": "bmw L6",
+            "Related": "BMW 5 Series (F10)"
+        },
+        "Powertrain": {
+            "Engine": "2.0 L BMW N20B20 turbo I4 (petrol)",
+            "Power output": "129.4\u2013170 kW (174\u2013228 hp; 176\u2013231 PS)",
+            "Transmission": "8-speed automatic"
+        },
+        "Dimensions": {
+            "Wheelbase": "2,968 mm (116.9 in)",
+            "Length": "4,973 mm (195.8 in)",
+            "Width": "1,900 mm (74.8 in)",
+            "Height": "1,464 mm (57.6 in)"
+        }
     }
 ]

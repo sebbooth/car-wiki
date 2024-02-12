@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
-from sel_util import *
+from resources.sel_util import *
 
 def scrape_models(driver, url):
     vehicles = []
@@ -94,10 +93,13 @@ def scrape_models(driver, url):
     return vehicles
 
 """
-from write_to_file import *
+from file_io import *
+from sel_util import *
 driver = webdriver.Firefox()
 vehiclesL = (scrape_models(driver, "https://en.wikipedia.org/wiki/Mitsubishi_Pajero"))
-write_to_file("vehiclesTest.json", vehiclesL)
+write_to_file_json("output/vehiclesTest.json", vehiclesL)
 vehiclesL = (scrape_models(driver, "https://de.wikipedia.org/wiki/GAZ-3307"))
-write_to_file("vehiclesTest.json", vehiclesL)
+write_to_file_json("output/vehiclesTest.json", vehiclesL)
+vehiclesL = (scrape_models(driver, "https://en.wikipedia.org/wiki/VinFast_LUX_A2.0"))
+write_to_file_json("output/vehiclesTest.json", vehiclesL)
 """

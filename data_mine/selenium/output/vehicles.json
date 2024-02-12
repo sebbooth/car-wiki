@@ -36085,5 +36085,128 @@
         },
         "show\nRoute map": {},
         "": {}
+    },
+    {
+        "Make": "Bolwell",
+        "Model": "Mk VIII Nagari",
+        "URL": "https://en.wikipedia.org/wiki/Bolwell_Nagari",
+        "imgURL": "https://en.wikipedia.org/wiki/File:Bolwell_Nagari_(14792341560).jpg",
+        "Overview": {
+            "Manufacturer": "Bolwell",
+            "Production": "1970 to 1974[1]",
+            "Assembly": "Mordialloc, Victoria"
+        },
+        "Body and chassis": {
+            "Class": "Sports car",
+            "Body style": "2-door coup\u00e9\n2-door convertible",
+            "Layout": "FR layout"
+        },
+        "Powertrain": {
+            "Engine": "5.0L Ford Windsor 302 V8\n5.8L Ford Windsor 351 V8",
+            "Transmission": "4-speed manual"
+        },
+        "Dimensions": {
+            "Wheelbase": "2,350 mm (92.5 in)",
+            "Length": "4,013 mm (158.0 in)",
+            "Width": "1,676 mm (66.0 in)",
+            "Height": "1,118 mm (44.0 in)",
+            "Curb weight": "927 kg (2,044 lb) (coup\u00e9) 1,038 kg (2,288 lb) (convertible)"
+        },
+        "Chronology": {
+            "Predecessor": "Bolwell Mk VII"
+        }
+    },
+    {
+        "Make": "Bolwell",
+        "Model": "Mk VIII Nagari Bolwell Mk X Nagari",
+        "URL": "https://en.wikipedia.org/wiki/Bolwell_Nagari",
+        "imgURL": "https://en.wikipedia.org/wiki/File:New_Bolwell_Nagari.jpg",
+        "Overview": {
+            "Manufacturer": "Bolwell",
+            "Also called": "Bolwell Nagari 300",
+            "Production": "2009 to present",
+            "Assembly": "Seaford, Victoria"
+        },
+        "Body and chassis": {
+            "Class": "Sports car",
+            "Body style": "2-door coup\u00e9",
+            "Layout": "MR layout"
+        },
+        "Powertrain": {
+            "Engine": "3.5L V6\n3.5L V6-S",
+            "Transmission": "6-speed manual\n6-speed automatic"
+        },
+        "Dimensions": {
+            "Wheelbase": "2,350 mm (92.5 in)",
+            "Length": "4,100 mm (161.4 in)",
+            "Width": "1,830 mm (72.0 in)",
+            "Height": "1,175 mm (46.3 in)",
+            "Curb weight": "920\u2013990 kg (2,028\u20132,183 lb)"
+        },
+        "Chronology": {
+            "Predecessor": "Bolwell IKARA"
+        }
+    },
+    {
+        "Make": "Eniak",
+        "Model": "Antique",
+        "URL": "https://en.wikipedia.org/wiki/Eniak_Antique",
+        "imgURL": "https://en.wikipedia.org/wiki/File:Eniak_Antique.jpg",
+        "Overview": {
+            "Manufacturer": "Eniak",
+            "Production": "1983\u20131989",
+            "Assembly": "Buenos Aires, Argentina"
+        },
+        "Body and chassis": {
+            "Body style": "2-door roadster",
+            "Layout": "FR layout"
+        },
+        "Powertrain": {
+            "Engine": "1.8 VW-Dodge I4\n3.6 I6",
+            "Transmission": "4-speed manual"
+        },
+        "Dimensions": {
+            "Wheelbase": "2,450 mm (96.5 in)[1]",
+            "Length": "3,900 mm (153.5 in)",
+            "Width": "1,600 mm (63.0 in)",
+            "Height": "1,270 mm (50.0 in)",
+            "Curb weight": "750 kg (1,653 lb)"
+        }
+    },
+    {
+        "Make": "ASA",
+        "Model": "1000 GT",
+        "URL": "https://en.wikipedia.org/wiki/ASA_(automobile)",
+        "imgURL": "https://en.wikipedia.org/wiki/File:ASA_1000_GT_-_Museo_Ferrari_(17514127854).jpg",
+        "Overview": {
+            "Manufacturer": "ASA",
+            "Also called": "Ferrarina",
+            "Production": "1964-1967",
+            "Assembly": "Italy: Milan",
+            "Designer": "Giorgetto Giugiaro at Bertone"
+        },
+        "Body and chassis": {
+            "Class": "Grand tourer",
+            "Body style": "2-door coup\u00e9\n2-door convertible",
+            "Layout": "Longitudinal front-engine, rear-wheel drive"
+        },
+        "Powertrain": {
+            "Engine": "1,032 cc Tipo 141 I4 (gasoline)\n1,092 cc Tipo 141 I4 (gasoline) (ASA 411 racing version)",
+            "Transmission": "4-speed Sunbeam manual with overdrive\n5-speed manual (optional)"
+        },
+        "Dimensions": {
+            "Wheelbase": "2,200 mm (86.6 in)",
+            "Curb weight": "780 kg (1,720 lb)\n709 kg (1,562 lb) (ASA 411 racing version)"
+        }
+    },
+    {
+        "Make": "Anasagasti",
+        "Model": "Anasagasti",
+        "URL": "https://en.wikipedia.org/wiki/Anasagasti",
+        "imgURL": "https://en.wikipedia.org/wiki/File:Anasagasti01.jpg",
+        "Overview": {
+            "Model years": "1912\u201314",
+            "Designer": "Horacio Anasagasti"
+        }
     }
 ]
