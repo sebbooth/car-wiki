@@ -120,12 +120,10 @@ def check_for_keywords(page_source):
 def main():
 
     driver = webdriver.Firefox()
-
-    links = linkCollection("logs/linkSet.txt", "logs/linkList.txt")
+    links = linkCollection("scraper_logs/linkSet.txt", "scraper_logs/linkList.txt")
 
     if not links.read_from_logs():
         links = scrape_brand_list(driver, links, "https://en.wikipedia.org/wiki/List_of_car_brands", output=True)
-
 
     vehicles = []
     for i in range(1000):
@@ -138,9 +136,8 @@ def main():
         print("\033[34m[GO TO]\033[0m", nextLink, "\033[34m[TITLE]\033[0m", title)
 
         driver.get(nextLink)
-        
+    
         hasKeyword = check_for_keywords(driver.page_source)
-
         if (hasKeyword == False):
             print("\033[31;2m[NO KEYWORD FOUND]\033[0m ", nextLink)
             continue
@@ -148,8 +145,6 @@ def main():
         try:
             vehicles = scrape_models(driver, nextLink)
             write_to_file_json("vehicles.json", vehicles)
-
-
         except:
             pass
 
@@ -163,7 +158,6 @@ def main():
 
             except:
                 highlight(element, "red", 5)
-
 
     write_to_file_json("output/vehicles.json", vehicles)
     print("\n\nEXITING\n\n")
