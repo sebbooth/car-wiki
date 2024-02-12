@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,react,firebase,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,react,firebase,node
 
+# Python
+__pycache__
+geckodriver.log
+
 # Logs
 logs
 *.log
