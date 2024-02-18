@@ -1,0 +1,26 @@
+{
+  "https://www.cars.com/research/acura-cl-2003/specs/100352/": {
+    "name": "2dr Cpe 3.2L",
+    "msrp": "$28,200"
+  },
+  "https://www.cars.com/research/acura-cl-2003/specs/100353/": {
+    "name": "2dr Cpe 3.2L w/Navigation",
+    "msrp": "$30,350"
+  },
+  "https://www.cars.com/research/acura-cl-2003/specs/100356/": {
+    "name": "2dr Cpe 3.2L Type S 6-Speed",
+    "msrp": "$30,550"
+  },
+  "https://www.cars.com/research/acura-cl-2003/specs/100354/": {
+    "name": "2dr Cpe 3.2L Type S",
+    "msrp": "$30,550"
+  },
+  "https://www.cars.com/research/acura-cl-2003/specs/100357/": {
+    "name": "2dr Cpe 3.2L Type S 6-Speed w/Nav",
+    "msrp": "$32,700"
+  },
+  "https://www.cars.com/research/acura-cl-2003/specs/100355/": {
+    "name": "2dr Cpe 3.2L Type S w/Navigation",
+    "msrp": "$32,700"
+  }
+}
