@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
+import { splitVendorChunkPlugin } from "vite";
 import react from "@vitejs/plugin-react";
+
 import path from "path";
 import dotenv from "dotenv";
 
@@ -9,7 +11,22 @@ const envVariables = dotenv.config({ path: envPath }).parsed;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), splitVendorChunkPlugin()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return id
+              .toString()
+              .split("node_modules/")[1]
+              .split("/")[0]
+              .toString();
+          }
+        },
+      },
+    },
+  },
   define: {
     "process.env": JSON.stringify(envVariables),
   },
