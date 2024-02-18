@@ -1,9 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-from resources.sel_util import *
-from resources.scrape_models import *
-from resources.file_io import *
+from scrapers.scrape_models import *
+
+import sys
+sys.path.insert(0, '../')
+
+import selenium_resources
 
 class linkCollection:
     def __init__(self, setFilePath, listFilePath):
