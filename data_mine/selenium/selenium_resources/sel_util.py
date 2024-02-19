@@ -14,4 +14,5 @@ def delete_element(driver, ByMethod, matchString):
         element.parentNode.removeChild(element);
         """, element)
     except:
-        print(f"Couldn't find {matchString}")
+        #print(f"Couldn't find {matchString}")
+        pass

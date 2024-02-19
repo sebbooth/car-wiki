@@ -4,6 +4,7 @@
 # Python
 __pycache__
 geckodriver.log
+.test_data
 
 # Logs
 logs

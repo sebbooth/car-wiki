@@ -9,11 +9,13 @@ sys.path.insert(0, '../../')
 from selenium_resources.sel_util import *
 from selenium_resources.file_io import *
 
-from scrape_specs import *
+from scrapers.scrape_specs import *
 
 def scrape_model_1(driver):
     specs_link_xpath = '//a[contains(@href, "/specs/")]'
     specs_link = driver.find_element(By.XPATH, specs_link_xpath)
+    links_dict = {}
+
     if specs_link:
         specs_href = specs_link.get_attribute('href')
         driver.get(specs_href)
@@ -23,7 +25,6 @@ def scrape_model_1(driver):
             change_trim_link[0].click()
 
             trim_links = driver.find_elements(By.XPATH, "//div[contains(@class, 'sds-modal__content-body')]//ul//li//a")
-            links_dict = {}
             for link in trim_links:
                 href = link.get_attribute("href")
                 name = link.text
@@ -31,7 +32,20 @@ def scrape_model_1(driver):
                 msrp = msrp_span.text.strip()
                 links_dict[href] = {"Trim": name, "MSRP": msrp}
 
-            return links_dict
+    trims = []
+    
+    for trim_link in links_dict:
+        trim = {"Trim" : links_dict[trim_link]["Trim"], "URL" : trim_link, "MSRP" : links_dict[trim_link]["MSRP"] }  
+        driver.get(trim_link)
+        time.sleep(2)
+        delete_element(driver, By.CLASS_NAME, "global-header-container")
+        delete_element(driver, By.ID, "onetrust-consent-sdk")
+        delete_element(driver, By.ID, "credential_picker_container")
+        trim.update(scrape_specs_1(driver))
+        trims.append(trim)
+
+
+    return trims
         
 def scrape_model_2(driver):
     time.sleep(2)
@@ -39,7 +53,6 @@ def scrape_model_2(driver):
     delete_element(driver, By.ID, "onetrust-consent-sdk")
     delete_element(driver, By.ID, "credential_picker_container")
 
-    
     desktop_trim_picker_button = driver.find_element(By.ID, "desktop-trim-picker")
     driver.execute_script("arguments[0].click();", desktop_trim_picker_button)        
 
@@ -48,12 +61,12 @@ def scrape_model_2(driver):
     trims = []
     for button in buttons:
         highlight(button, "blue", 5)
+        driver.execute_script("arguments[0].click();", button)        
 
-        button.click()
         print(button.get_attribute("data-option-value"))
         time.sleep(2)
 
-        trim = {"Trim" : button.get_attribute("data-option-value")}    
+        trim = {"Trim" : button.get_attribute("data-option-value"), "URL" : driver.current_url}    
         trim.update(scrape_specs_2(driver))
 
         trims.append(trim)
@@ -62,15 +75,18 @@ def scrape_model_2(driver):
 
     return trims
 
-
+"""
 if __name__=='__main__':
     options = Options()
     #options.preferences.update({"javascript.enabled": False})
     driver = webdriver.Firefox(options=options)
-
+    
     driver.get("https://www.cars.com/research/acura-cl-2003")
     print(scrape_model_1(driver))
-
+    
     driver.get("https://www.cars.com/research/kia-ev9-2024/")
     print(scrape_model_2(driver, ))
+    
+
     driver.close()
+"""

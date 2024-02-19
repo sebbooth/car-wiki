@@ -24,6 +24,37 @@ def write_to_file_json(filePath, new_data):
     json_file.close()
 
 
+def write_to_file_fields(filePath, new_data):
+    with open(filePath, "r", encoding="utf-8") as json_file:
+        try:
+            existing_data = json.load(json_file)
+        except json.JSONDecodeError:
+            existing_data = {}
+
+    for category in new_data:
+        if category in existing_data:
+            fields = set(existing_data[category])
+            for field in new_data[category]:
+                fields.add(field)
+
+            existing_data[category] = list(fields)
+        else:
+            existing_data[category] = new_data[category]
+
+    with open(filePath, "w", encoding="utf-8") as json_file:
+        json.dump(existing_data, json_file, indent=4)
+    
+    json_file.close()
+
+def read_file_fields(filePath):
+    with open(filePath, "r", encoding="utf-8") as json_file:
+        try:
+            existing_data = json.load(json_file)
+        except json.JSONDecodeError:
+            existing_data = {}
+
+    return existing_data
+
 def write_to_file_link_list(filePath, links):
     existing_links = set() 
     try:
@@ -106,3 +137,11 @@ def pop_link(filePath):
     file.close()
 
     return link
+
+def read_carsdotcom_json(filePath):
+    with open(filePath, "r", encoding="utf-8") as json_file:
+        try:
+            existing_data = json.load(json_file)
+        except json.JSONDecodeError:
+            existing_data = {}
+    return existing_data
