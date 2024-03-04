@@ -1,11 +1,12 @@
-import { Auth, CarCRUD, FileUpload } from "./components";
+import { Auth, CarCRUD, CarList, DumpDB, FileUpload } from "./components";
 
 function App() {
   return (
     <>
       <Auth />
       <FileUpload />
-      <CarCRUD />
+      <DumpDB />
+      <CarList />
     </>
   );
 }

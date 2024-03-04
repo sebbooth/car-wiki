@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 import { auth, googleProvider } from "../../config/firebase";
