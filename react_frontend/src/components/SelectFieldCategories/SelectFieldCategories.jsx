@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useContext, useState, useMemo } from "react";
 import "./SelectFieldCategories.scss";
 import { db, auth } from "../../config/firebase";
 import {
@@ -12,7 +12,7 @@ import {
   getDoc,
   Timestamp,
 } from "firebase/firestore";
-
+import { SearchContext } from "../../contexts/SearchContext";
 import { SelectFields } from "../";
 
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -47,6 +47,16 @@ const SelectFieldCategories = () => {
   const [allFieldCategories, setAllFieldCategories] = useState([]);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const { changeSearchFields } = useContext(SearchContext);
+
+  useEffect(() => {
+    for (const catI in allFieldCategories) {
+      const catName = allFieldCategories[catI].category;
+      if (!selectedCategories.includes(catName)) {
+        changeSearchFields(catName, []);
+      }
+    }
+  }, [selectedCategories]);
 
   const handleChange = (event) => {
     const {
