@@ -31,10 +31,6 @@ jobs:
       run:
         working-directory: react_frontend
     steps:
-      - name: "Create Env File"
-        run: |
-          touch .env
-          echo "${{ secrets.REACT_APP_ENV_FILE }}" > .env
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
