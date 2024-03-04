@@ -10,6 +10,8 @@ jobs:
         run: |
           touch .env
           echo "${{ secrets.REACT_APP_ENV_FILE }}" > .env
+        working-directory: react_frontend
+
       - run: npm ci && npm run build
         working-directory: react_frontend
       - uses: FirebaseExtended/action-hosting-deploy@v0
