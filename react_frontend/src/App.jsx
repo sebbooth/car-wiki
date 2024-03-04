@@ -1,4 +1,15 @@
-import { Auth, CarCRUD, CarList, DumpDB, FileUpload } from "./components";
+import {
+  Auth,
+  CarCRUD,
+  CarList,
+  DumpDB,
+  DumpFields,
+  DumpFieldsByCategory,
+  SelectFieldCategories,
+  FileUpload,
+} from "./components";
+
+import { SearchContextProvider } from "./contexts/SearchContext";
 
 function App() {
   return (
@@ -6,7 +17,12 @@ function App() {
       <Auth />
       <FileUpload />
       <DumpDB />
-      <CarList />
+      <DumpFields />
+      <DumpFieldsByCategory />
+      <SearchContextProvider>
+        <SelectFieldCategories />
+        <CarList />
+      </SearchContextProvider>
     </>
   );
 }

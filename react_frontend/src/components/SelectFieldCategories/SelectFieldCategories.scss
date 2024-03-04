@@ -1,0 +1,10 @@
+.select-categories-container {
+  display: flex;
+}
+
+.categories-container {
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

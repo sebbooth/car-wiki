@@ -1,17 +1,9 @@
 import React from "react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
+import { SearchContext } from "../../contexts/SearchContext";
 
-import { db, auth } from "../../config/firebase";
-import {
-  getDocs,
-  collection,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-  doc,
-  getDoc,
-  Timestamp,
-} from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -19,35 +11,15 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-
-function createEmptyObjectWithAllFields(collection) {
-  const result = {};
-
-  collection.forEach((obj) => {
-    addFieldsToResult(obj, result);
-  });
-
-  return result;
-}
-
-function addFieldsToResult(obj, result) {
-  for (const key in obj) {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      if (!result[key] && key != "") {
-        result[key] = {};
-      }
-      addFieldsToResult(obj[key], result[key]);
-    } else if (obj[key] !== "") {
-      result[key] = null;
-    }
-  }
-}
 
 const CarList = () => {
   const [vehicleList, setVehicleList] = useState([]);
-  const [vehicleFields, setVehicleFields] = useState({});
+
+  const [headers, setHeaders] = useState(null);
+  const [rows, setRows] = useState(null);
+
+  const { searchFields } = useContext(SearchContext);
 
   const vehiclesCollectionRef = useMemo(() => {
     return collection(db, "testVehicles");
@@ -56,19 +28,12 @@ const CarList = () => {
   const getVehicleList = async () => {
     try {
       const data = await getDocs(vehiclesCollectionRef);
-      console.log("getDocs");
+      console.log("getVehicleList");
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setVehicleList(filteredData);
-      let fields = createEmptyObjectWithAllFields(filteredData);
-      delete fields["URL"];
-      delete fields["userID"];
-      delete fields["dateCreated"];
-      delete fields["imgURL"];
-      delete fields["id"];
-      setVehicleFields(fields);
     } catch (err) {
       console.error(err);
     }
@@ -78,43 +43,38 @@ const CarList = () => {
     getVehicleList();
   }, []);
 
-  const createTableHeaders = (obj) => {
-    const columnGroups = Object.keys(obj).map((key) => {
-      if (typeof obj[key] === "object" && obj[key] !== null) {
+  const updateTable = () => {
+    setHeaders(() => createTableHeaders(searchFields));
+    setRows(() => createTableRows(searchFields, vehicleList));
+  };
+
+  const createTableHeaders = (searchFields) => {
+    const columnGroups = Object.keys(searchFields).map((category) => {
+      if (searchFields[category].length != 0) {
         return (
           <TableCell
-            key={key}
+            key={category}
             align="center"
-            colSpan={Object.keys(obj[key]).length}
+            colSpan={searchFields[category].length}
           >
-            {key}
-          </TableCell>
-        );
-      } else {
-        return (
-          <TableCell key={key} align="center" colSpan={1}>
-            {key}
+            {category}
           </TableCell>
         );
       }
     });
 
-    const columns = Object.keys(obj).map((key) => {
-      if (typeof obj[key] === "object" && obj[key] !== null) {
-        return Object.keys(obj[key]).map((subKey) => (
-          <TableCell key={subKey} align="left">
-            {subKey}
-          </TableCell>
-        ));
-      } else {
-        return (
-          <TableCell key={key} align="left">
-            {key}
-          </TableCell>
-        );
+    const columns = Object.keys(searchFields).map((category) => {
+      if (searchFields[category].length != 0) {
+        const cells = searchFields[category].map((field) => {
+          return (
+            <TableCell key={field} align="left">
+              {field}
+            </TableCell>
+          );
+        });
+        return cells;
       }
     });
-
     return (
       <TableHead>
         <tr>{columnGroups}</tr>
@@ -123,42 +83,45 @@ const CarList = () => {
     );
   };
 
-  const createTableRows = (obj, vehicles) => {
+  const createTableRows = (searchFields, vehicles) => {
     const rows = vehicles.map((vehicle) => {
-      const row = Object.keys(obj).map((key) => {
-        if (typeof obj[key] === "object" && obj[key] !== null) {
-          return Object.keys(obj[key]).map((subKey) => {
-            if (
-              vehicle[key] != undefined &&
-              vehicle[key][subKey] != undefined
-            ) {
-              return (
-                <TableCell key={subKey} align="left">
-                  {vehicle[key][subKey]}
-                </TableCell>
-              );
+      const row = Object.keys(searchFields).map((category) => {
+        if (searchFields[category].length != 0) {
+          const cells = searchFields[category].map((field) => {
+            if (category == "General") {
+              if (vehicle[field] != undefined) {
+                return (
+                  <TableCell key={field} align="left">
+                    {vehicle[field]}
+                  </TableCell>
+                );
+              } else {
+                return (
+                  <TableCell key={field} align="left">
+                    N/A
+                  </TableCell>
+                );
+              }
             } else {
-              return (
-                <TableCell key={subKey} align="left">
-                  N/A
-                </TableCell>
-              );
+              if (
+                vehicle[category] != undefined &&
+                vehicle[category][field] != undefined
+              ) {
+                return (
+                  <TableCell key={field} align="left">
+                    {vehicle[category][field]}
+                  </TableCell>
+                );
+              } else {
+                return (
+                  <TableCell key={field} align="left">
+                    N/A
+                  </TableCell>
+                );
+              }
             }
           });
-        } else {
-          if (vehicle[key] != undefined) {
-            return (
-              <TableCell key={key} align="left">
-                {vehicle[key]}
-              </TableCell>
-            );
-          } else {
-            return (
-              <TableCell key={key} align="left">
-                N/A
-              </TableCell>
-            );
-          }
+          return cells;
         }
       });
       return <TableRow key={vehicle.id}>{row}</TableRow>;
@@ -167,14 +130,17 @@ const CarList = () => {
   };
 
   return (
-    <Paper sx={{ width: "100%" }}>
-      <TableContainer sx={{ maxHeight: 800 }}>
-        <Table stickyHeader aria-label="sticky table">
-          {createTableHeaders(vehicleFields)}
-          {createTableRows(vehicleFields, vehicleList)}
-        </Table>
-      </TableContainer>
-    </Paper>
+    <>
+      <button onClick={updateTable}>Update</button>
+      <Paper sx={{ width: "100%" }}>
+        <TableContainer sx={{ maxHeight: 800 }}>
+          <Table stickyHeader aria-label="sticky table">
+            {headers}
+            {rows}
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 };
 

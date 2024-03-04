@@ -29,34 +29,7 @@ function getRandomItemsFromArray(array, numItems) {
   return randomItemsArray;
 }
 
-function createEmptyObjectWithAllFields(collection) {
-  const result = {};
-
-  collection.forEach((obj) => {
-    addFieldsToResult(obj, result);
-  });
-
-  return result;
-}
-
-function addFieldsToResult(obj, result) {
-  for (const key in obj) {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      if (!result[key] && key != "") {
-        result[key] = {};
-      }
-      addFieldsToResult(obj[key], result[key]);
-    } else if (obj[key] !== "") {
-      result[key] = null;
-    }
-  }
-}
-
 const DumpDB = () => {
-  //const data = getRandomItemsFromArray(rawData, 30);
-
-  //const emptyObjectWithAllFields = createEmptyObjectWithAllFields(rawData);
-  //console.log(emptyObjectWithAllFields);
   const vehiclesCollectionRef = useMemo(() => {
     return collection(db, "testVehicles");
   }, []);
@@ -81,16 +54,6 @@ const DumpDB = () => {
       } catch (err) {
         console.error(err);
       }
-    }
-  };
-
-  const dumpFields = async () => {
-    try {
-      const vehicleDoc = doc(db, "testVehicles", "allFields");
-      await updateDoc(vehicleDoc, { ...emptyObjectWithAllFields });
-      console.log("updateDoc");
-    } catch (err) {
-      console.error(err);
     }
   };
 
@@ -119,7 +82,6 @@ const DumpDB = () => {
       </button>
       <button onClick={testQuery}>Test query</button>
       <button onClick={onClick}>Dump data</button>
-      <button onClick={dumpFields}>Dump fields</button>
     </div>
   );
 };
