@@ -11,6 +11,7 @@ const envVariables = dotenv.config({ path: envPath }).parsed;
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/car-wiki/",
   plugins: [react(), splitVendorChunkPlugin()],
   build: {
     rollupOptions: {
