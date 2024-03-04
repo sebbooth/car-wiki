@@ -27,16 +27,19 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: react_frontend
 
     steps:
+      - name: "Create Env File"
+        run: |
+          touch .env
+          echo "${{ secrets.REACT_APP_ENV_FILE }}" > .env
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
+        working-directory: react_frontend
         run: npm install
       - name: Build
+        working-directory: react_frontend
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v3
