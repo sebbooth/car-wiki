@@ -14,11 +14,6 @@ import { SearchContextProvider } from "./contexts/SearchContext";
 function App() {
   return (
     <>
-      <Auth />
-      <FileUpload />
-      <DumpDB />
-      <DumpFields />
-      <DumpFieldsByCategory />
       <SearchContextProvider>
         <SelectFieldCategories />
         <CarList />
