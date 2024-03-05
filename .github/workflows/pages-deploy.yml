@@ -32,9 +32,17 @@ jobs:
         working-directory: react_frontend
 
     steps:
-      - name: Create .env file
-        uses: SpicyPizza/create-envfile@v2.0.3
-        with:
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_FIREBASE_API_KEY=${REACT_APP_FIREBASE_API_KEY} >> .env
+          echo REACT_APP_FIREBASE_AUTH_DOMAIN=${REACT_APP_FIREBASE_AUTH_DOMAIN} >> .env
+          echo REACT_APP_FIREBASE_PROJECT_ID=${REACT_APP_FIREBASE_PROJECT_ID} >> .env
+          echo REACT_APP_FIREBASE_STORAGE_BUCKET=${REACT_APP_FIREBASE_STORAGE_BUCKET} >> .env
+          echo REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${REACT_APP_FIREBASE_MESSAGING_SENDER_ID} >> .env
+          echo REACT_APP_FIREBASE_APP_ID=${REACT_APP_FIREBASE_APP_ID} >> .env
+          cat .env
+        env:
           REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
           REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}
           REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}
