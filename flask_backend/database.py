@@ -1,11 +1,10 @@
 import firebase_admin
-from firebase_admin import credentials
 from firebase_admin import firestore
 from datetime import datetime
 
 class FirestoreDBWrapper:
-    def __init__(self):
-        self.app = firebase_admin.initialize_app(credentials.Certificate("./.env/creds.json"))
+    def __init__(self, app):
+        self.app = app
         self.db = firestore.client()
 
     def collection(self, collection_name):

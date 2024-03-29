@@ -1,10 +1,10 @@
 from flask import jsonify, request
 from datetime import datetime
 
-from app import app
+from app import app, fb_app
 from database import *
 
-db = FirestoreDBWrapper()
+db = FirestoreDBWrapper(fb_app)
 
 @app.route('/documents', methods=['GET'])
 def query_documents():
